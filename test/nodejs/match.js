@@ -247,15 +247,15 @@ test('match: throws on invalid tidy param', function(assert) {
         /tidy must be of type Boolean/);
 });
 
-test('match: throws on invalid config param', function(assert) {
-    assert.plan(1);
-    var osrm = new OSRM({path: mld_data_path, algorithm: 'MLD'});
-    var options = {
-        coordinates: three_test_coordinates,
-    };
-    assert.throws(function() { osrm.match(options, { format: 'invalid' }, function(err, response) {}) },
-        /format must be a string:/);
-});
+// test('match: throws on invalid config param', function(assert) {
+//     assert.plan(1);
+//     var osrm = new OSRM({path: mld_data_path, algorithm: 'MLD'});
+//     var options = {
+//         coordinates: three_test_coordinates,
+//     };
+//     assert.throws(function() { osrm.match(options, { format: 'invalid' }, function(err, response) {}) },
+//         /format must be a string:/);
+// });
 
 // test('match: match in Monaco without motorways', function(assert) {
 //     assert.plan(3);

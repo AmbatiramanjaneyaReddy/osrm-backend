@@ -28,7 +28,7 @@ MMapMemoryAllocator::MMapMemoryAllocator(const storage::StorageConfig &config)
 
         // Convert the boost::filesystem::path object into a plain string
         // that's stored as a member of this allocator object
-        rtree_filename = storage.PopulateLayoutWithRTree(fake_layout);
+        rtree_filename = storage.PopulateLayoutWithRTree(*fake_layout);
 
         // Now, we add one more AllocatedRegion, with it's start address as the start
         // of the rtree_filename string we've saved.  In the fake_layout, we've
@@ -56,7 +56,7 @@ MMapMemoryAllocator::MMapMemoryAllocator(const storage::StorageConfig &config)
             boost::iostreams::mapped_file mapped_memory_file;
             util::mmapFile<char>(file.second, mapped_memory_file);
             mapped_memory_files.push_back(std::move(mapped_memory_file));
-            storage.readBlocks(file.second, layout);
+            storage.readBlocks(file.second, *layout);
             allocated_regions.push_back({mapped_memory_file.data(), std::move(layout)});
         }
     }

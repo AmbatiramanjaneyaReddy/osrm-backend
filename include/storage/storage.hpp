@@ -48,11 +48,10 @@ class Storage
     int Run(int max_wait, const std::string &name, bool only_metric);
     void PopulateStaticData(const SharedDataIndex &index);
     void PopulateUpdatableData(const SharedDataIndex &index);
-    void PopulateLayout(std::unique_ptr<storage::BaseDataLayout> &layout,
+    void PopulateLayout(storage::BaseDataLayout &layout,
                         std::vector<std::pair<bool, boost::filesystem::path>> files);
-    std::string PopulateLayoutWithRTree(std::unique_ptr<storage::BaseDataLayout> &layout);
-    void readBlocks(const boost::filesystem::path &path,
-                    std::unique_ptr<storage::BaseDataLayout> &layout);
+    std::string PopulateLayoutWithRTree(storage::BaseDataLayout &layout);
+    void readBlocks(const boost::filesystem::path &path, storage::BaseDataLayout &layout);
     std::vector<std::pair<bool, boost::filesystem::path>> GetUpdatableFiles();
     std::vector<std::pair<bool, boost::filesystem::path>> GetStaticFiles();
 

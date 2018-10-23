@@ -53,7 +53,7 @@ void listRegions(bool show_blocks)
             io::BufferReader reader(reinterpret_cast<char *>(memory->Ptr()), memory->Size());
 
             std::unique_ptr<BaseDataLayout> layout = std::make_unique<DataLayout>();
-            serialization::read(reader, layout);
+            serialization::read(reader, *layout);
 
             std::vector<std::string> block_names;
             layout->List("", std::back_inserter(block_names));

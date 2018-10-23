@@ -284,14 +284,11 @@ template <typename K, typename V> void write(io::BufferWriter &writer, const std
     }
 }
 
-inline void read(io::BufferReader &reader, std::unique_ptr<BaseDataLayout> &layout)
-{
-    read(reader, layout->blocks);
-}
+inline void read(io::BufferReader &reader, BaseDataLayout &layout) { read(reader, layout.blocks); }
 
-inline void write(io::BufferWriter &writer, const std::unique_ptr<BaseDataLayout> &layout)
+inline void write(io::BufferWriter &writer, const BaseDataLayout &layout)
 {
-    write(writer, layout->blocks);
+    write(writer, layout.blocks);
 }
 } // namespace serialization
 } // namespace storage

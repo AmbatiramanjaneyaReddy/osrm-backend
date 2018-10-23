@@ -23,9 +23,9 @@ namespace storage
 class BaseDataLayout;
 namespace serialization
 {
-inline void read(io::BufferReader &reader, std::unique_ptr<BaseDataLayout> &layout);
+inline void read(io::BufferReader &reader, BaseDataLayout &layout);
 
-inline void write(io::BufferWriter &writer, const std::unique_ptr<BaseDataLayout> &layout);
+inline void write(io::BufferWriter &writer, const BaseDataLayout &layout);
 } // namespace serialization
 
 namespace detail
@@ -141,10 +141,8 @@ class DataLayout final : public BaseDataLayout
     }
 
   private:
-    friend void serialization::read(io::BufferReader &reader,
-                                    std::unique_ptr<BaseDataLayout> &layout);
-    friend void serialization::write(io::BufferWriter &writer,
-                                     const std::unique_ptr<BaseDataLayout> &layout);
+    friend void serialization::read(io::BufferReader &reader, BaseDataLayout &layout);
+    friend void serialization::write(io::BufferWriter &writer, const BaseDataLayout &layout);
 
     const Block &GetBlock(const std::string &name) const
     {
@@ -227,10 +225,8 @@ class TarDataLayout final : public BaseDataLayout
     }
 
   private:
-    friend void serialization::read(io::BufferReader &reader,
-                                    std::unique_ptr<BaseDataLayout> &layout);
-    friend void serialization::write(io::BufferWriter &writer,
-                                     const std::unique_ptr<BaseDataLayout> &layout);
+    friend void serialization::read(io::BufferReader &reader, BaseDataLayout &layout);
+    friend void serialization::write(io::BufferWriter &writer, const BaseDataLayout &layout);
 
     const Block &GetBlock(const std::string &name) const
     {

@@ -198,6 +198,7 @@ template <> class vector_view<bool>
         // Note: ordering of bits here should match packBits in storage/serialization.hpp
         //       so that directly mmap-ing data is possible
         const auto offset = index % WORD_BITS;
+        BOOST_ASSERT(WORD_BITS > offset);
         return m_ptr[bucket] & (static_cast<Word>(1) << offset);
     }
 
@@ -229,6 +230,7 @@ template <> class vector_view<bool>
         // Note: ordering of bits here should match packBits in storage/serialization.hpp
         //       so that directly mmap-ing data is possible
         const auto offset = index % WORD_BITS;
+        BOOST_ASSERT(WORD_BITS > offset);
         return reference{m_ptr + bucket, static_cast<Word>(1) << offset};
     }
 

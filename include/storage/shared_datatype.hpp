@@ -61,13 +61,13 @@ class BaseDataLayout
 
     virtual inline void SetBlock(const std::string &name, Block block) = 0;
 
-    virtual inline uint64_t GetBlockEntries(const std::string &name) const = 0;
+    virtual inline std::uint64_t GetBlockEntries(const std::string &name) const = 0;
 
-    virtual inline uint64_t GetBlockSize(const std::string &name) const = 0;
+    virtual inline std::uint64_t GetBlockSize(const std::string &name) const = 0;
 
     virtual inline bool HasBlock(const std::string &name) const = 0;
 
-    virtual inline uint64_t GetSizeOfLayout() const = 0;
+    virtual inline std::uint64_t GetSizeOfLayout() const = 0;
 
     // Depending on the name prefix this function either lists all blocks with the same prefix
     // or all entries in the sub-directory.
@@ -105,12 +105,12 @@ class DataLayout final : public BaseDataLayout
         blocks[name] = std::move(block);
     }
 
-    inline uint64_t GetBlockEntries(const std::string &name) const override final
+    inline std::uint64_t GetBlockEntries(const std::string &name) const override final
     {
         return GetBlock(name).num_entries;
     }
 
-    inline uint64_t GetBlockSize(const std::string &name) const override final
+    inline std::uint64_t GetBlockSize(const std::string &name) const override final
     {
         return GetBlock(name).byte_size;
     }
@@ -120,9 +120,9 @@ class DataLayout final : public BaseDataLayout
         return blocks.find(name) != blocks.end();
     }
 
-    inline uint64_t GetSizeOfLayout() const override final
+    inline std::uint64_t GetSizeOfLayout() const override final
     {
-        uint64_t result = 0;
+        std::uint64_t result = 0;
         for (const auto &name_and_block : blocks)
         {
             result += GetBlockSize(name_and_block.first) + BLOCK_ALIGNMENT;
@@ -158,7 +158,7 @@ class DataLayout final : public BaseDataLayout
     // Fit aligned storage in buffer to 64 bytes to conform with AVX 512 types
     inline void *align(void *&ptr) const noexcept
     {
-        const auto intptr = reinterpret_cast<uintptr_t>(ptr);
+        const auto intptr = reinterpret_cast<std::uintptr_t>(ptr);
         const auto aligned = (intptr - 1u + BLOCK_ALIGNMENT) & -BLOCK_ALIGNMENT;
         return ptr = reinterpret_cast<void *>(aligned);
     }
@@ -192,12 +192,12 @@ class TarDataLayout final : public BaseDataLayout
         blocks[name] = std::move(block);
     }
 
-    inline uint64_t GetBlockEntries(const std::string &name) const override final
+    inline std::uint64_t GetBlockEntries(const std::string &name) const override final
     {
         return GetBlock(name).num_entries;
     }
 
-    inline uint64_t GetBlockSize(const std::string &name) const override final
+    inline std::uint64_t GetBlockSize(const std::string &name) const override final
     {
         return GetBlock(name).byte_size;
     }
@@ -207,9 +207,9 @@ class TarDataLayout final : public BaseDataLayout
         return blocks.find(name) != blocks.end();
     }
 
-    inline uint64_t GetSizeOfLayout() const override final
+    inline std::uint64_t GetSizeOfLayout() const override final
     {
-        uint64_t result = 0;
+        std::uint64_t result = 0;
         for (const auto &name_and_block : blocks)
         {
             result += GetBlockSize(name_and_block.first);

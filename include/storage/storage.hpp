@@ -35,6 +35,7 @@ SOFTWARE, EVEN IF ADVISED OF THE POSSIBILITY OF SUCH DAMAGE.
 #include <boost/filesystem/path.hpp>
 
 #include <string>
+#include <vector>
 
 namespace osrm
 {
@@ -49,7 +50,7 @@ class Storage
     void PopulateStaticData(const SharedDataIndex &index);
     void PopulateUpdatableData(const SharedDataIndex &index);
     void PopulateLayout(storage::BaseDataLayout &layout,
-                        std::vector<std::pair<bool, boost::filesystem::path>> files);
+                        const std::vector<std::pair<bool, boost::filesystem::path>> &files);
     std::string PopulateLayoutWithRTree(storage::BaseDataLayout &layout);
     void readBlocks(const boost::filesystem::path &path, storage::BaseDataLayout &layout);
     std::vector<std::pair<bool, boost::filesystem::path>> GetUpdatableFiles();

@@ -364,7 +364,7 @@ std::string Storage::PopulateLayoutWithRTree(storage::BaseDataLayout &layout)
  * in that big block.  It updates the fields in the layout parameter.
  */
 void Storage::PopulateLayout(storage::BaseDataLayout &layout,
-                             std::vector<std::pair<bool, boost::filesystem::path>> files)
+                             const std::vector<std::pair<bool, boost::filesystem::path>> &files)
 {
     for (const auto &file : files)
     {

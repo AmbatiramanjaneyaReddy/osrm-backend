@@ -37,7 +37,7 @@ inline BlockT packBits(const T &data, std::size_t base_index, const std::size_t 
     static_assert(std::is_unsigned<BlockT>::value, "BlockT must be unsigned type");
     static_assert(std::is_integral<BlockT>::value, "BlockT must be an integral type");
     static_assert(CHAR_BIT == 8, "Non-8-bit bytes not supported, sorry!");
-    BOOST_ASSERT(sizeof(BlockT) * CHAR_BIT > count);
+    BOOST_ASSERT(sizeof(BlockT) * CHAR_BIT >= count);
 
     // Note: if this packing is changed, be sure to update vector_view<bool>
     //       as well, so that on-disk and in-memory layouts match.
@@ -57,7 +57,7 @@ unpackBits(T &data, const std::size_t base_index, const std::size_t count, const
     static_assert(std::is_unsigned<BlockT>::value, "BlockT must be unsigned type");
     static_assert(std::is_integral<BlockT>::value, "BlockT must be an integral type");
     static_assert(CHAR_BIT == 8, "Non-8-bit bytes not supported, sorry!");
-    BOOST_ASSERT(sizeof(BlockT) * CHAR_BIT > count);
+    BOOST_ASSERT(sizeof(BlockT) * CHAR_BIT >= count);
     for (std::size_t bit = 0; bit < count; ++bit)
     {
         data[base_index + bit] = value & (BlockT{1} << bit);
